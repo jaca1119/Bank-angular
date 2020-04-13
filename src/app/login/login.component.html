@@ -1,4 +1,6 @@
-<h1>Login window</h1>
+<div class="logo">
+Logo
+</div>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
@@ -15,3 +17,7 @@
 </form>
 
 <p *ngIf="isLoginFailed">Username and password incorrect</p>
+
+<footer>
+    Footer
+</footer>

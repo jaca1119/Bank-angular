@@ -1,9 +1,31 @@
-<p>
-  home works!
-</p>
-<nav>
-  <a [routerLink]="['account', '1']">Account #1</a>
-  <a [routerLink]="['account', '2']">Account #2</a>
-</nav>
+<div class="sidenav">
 
-<router-outlet></router-outlet>
+    <img class="logo" src="assets/bank-logo.png" alt="bank-logo">
+
+  <nav >
+    <div>
+      <p>Accounts:</p>
+      <a [routerLink]="['account', '1']">First account #1</a>
+      <a [routerLink]="['account', '2']">Second account #2</a>
+      <p>
+        Operations:
+      </p>
+      <a>Transfer</a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <div class="personal">
+    Name Surname #x
+  </div>
+
+  <div class="options">
+    Option 1, Option 2
+  </div>
+
+  <div class="details">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
