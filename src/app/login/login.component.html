@@ -1,20 +1,22 @@
-<div class="logo">
-Logo
+<div class="container">
+    <img class="logo" src="assets/bank-logo.png" alt="bank-logo">
 </div>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+<div class="login">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
-    <label for="login">Login:</label> <br>
-    <input id="login" type="text" formControlName="username">
-    <br>
+        <label for="login">Login:</label> <br>
+        <input id="login" type="text" formControlName="username">
+        <br>
 
-    <label for="password">Password:</label><br>
-    <input id="password" type="password" formControlName="password">
-    <br>
+        <label for="password">Password:</label><br>
+        <input id="password" type="password" formControlName="password">
+        <br>
 
-    <button type="submit">Login</button>
+        <button type="submit">Login</button>
 
-</form>
+    </form>
+</div>
 
 <p *ngIf="isLoginFailed">Username and password incorrect</p>
 
