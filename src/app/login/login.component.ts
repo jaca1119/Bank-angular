@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(loginData: { username: string; password: string; }) {
-    if (this.authService.authenticate(loginData.username, loginData.password)) {
+  onSubmit() {
+    if (this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)) {
       this.router.navigateByUrl('/auth');
     } else {
       this.isLoginFailed = true;
