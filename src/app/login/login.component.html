@@ -14,11 +14,15 @@
         <br>
 
         <button type="submit">Login</button>
-
     </form>
+
+    <div>
+        <p>Or register if you don't have account yet!</p>
+        <button (click)="onRegistrationClick()">Register</button>
+    </div>
 </div>
 
-<p *ngIf="isLoginFailed">Username and password incorrect</p>
+<p *ngIf="isLoginFailed">Username or password incorrect</p>
 
 <footer>
     Footer
