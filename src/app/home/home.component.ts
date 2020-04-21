@@ -12,4 +12,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  openPanel() {
+    console.warn(document.getElementById("sideNav"));
+    
+    document.getElementById("sideNav").classList.add("open");
+  }
+
+  closePanel() {
+    document.getElementById("sideNav").classList.remove("open");
+  }
+
 }

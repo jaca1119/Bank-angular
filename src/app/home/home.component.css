@@ -2,6 +2,8 @@ div {
     border: 1px solid black;
 }
 
+
+
 .sidenav {
     height: 100%;
     width: 200px;
@@ -11,12 +13,18 @@ div {
     left: 0;
 }
 
+
 .logo {
+    height: 100px;
+    background-color: white;
+}
+
+img {
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
     display: block;
-    width: 100px;
-    height: 100px;
+    z-index: 1;
 }
 
 .sidenav nav {
@@ -47,4 +55,60 @@ main {
 
 .personal {
     height: 100px;
+}
+
+.top {
+    display: none;
+    cursor: pointer;
+}
+
+.closebtn {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .sidenav {
+        height: 0;
+        width: 100vw;
+        position: fixed;
+        z-index: 1;
+        top: -10px;
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .open {
+        top: 0;
+        height: 90vh;
+    }
+
+    .closebtn {
+        display: unset;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 36px;
+        margin-left: 50px;
+        cursor: pointer;   
+    }
+
+    .top {
+        display: block;
+    }
+
+    .logo {
+        width: 100%;
+    }
+    
+    img {
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        display: block;
+        z-index: 1;
+    }
+
+    main {
+        margin-left: unset;
+    }
 }

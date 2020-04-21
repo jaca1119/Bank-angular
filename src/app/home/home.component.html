@@ -1,7 +1,13 @@
-<div class="sidenav">
+<div class="top">
+  <span (click)="openPanel()">&#9776; Open menu</span>
+</div>
 
-    <img class="logo" src="assets/bank-logo.png" alt="bank-logo">
+<div id="sideNav" class="sidenav">
+  <div class="closebtn" (click)="closePanel()">&times; Close</div>
 
+  <div class="logo">
+    <img src="assets/bank-logo.png" alt="bank-logo">
+  </div>
   <nav >
     <div>
       <p>Accounts:</p>
