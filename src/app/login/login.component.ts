@@ -29,11 +29,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)) {
-      this.router.navigateByUrl('/auth');
-    } else {
-      this.isLoginFailed = true;
-    }
+    this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
+    .then(response => {
+      if (response.ok) {
+        this.router.navigateByUrl('/auth');
+      } else {
+        this.isLoginFailed = true;
+      }
+    })
   }
 
   onRegistrationClick() {

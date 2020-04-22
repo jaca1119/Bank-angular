@@ -9,24 +9,25 @@ export class AuthenticationService {
 
   constructor() { }
 
-  authenticate(username: string, password: string): boolean {
+  authenticate(username: string, password: string) {
     
     let isAuthenticationSucessful = false;
     let json = JSON.stringify({username, password});
     console.warn(json);
     
 
-    fetch(API_URL + '/authenticate', {
-      method: "POST",
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: json
-    })
-    .then(response => {
-      console.warn(response);
-    })
+    return fetch(API_URL + '/authenticate', {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: json
+      })
+      .then(response => {
+        console.warn(response);
+        return response;
+      });
 
     // var req = new XMLHttpRequest();
     // req.open('POST', API_URL + '/authenticate', true);
@@ -45,7 +46,6 @@ export class AuthenticationService {
 
     // req.send(JSON.stringify({username, password}));
 
-    return isAuthenticationSucessful;
   }
 
 }
