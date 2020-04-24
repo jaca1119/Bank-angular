@@ -20,6 +20,7 @@
         <p>Or register if you don't have account yet!</p>
         <button (click)="onRegistrationClick()">Register</button>
     </div>
+    <button (click)="refreshToken()">RefreshToken</button>
 </div>
 
 <p *ngIf="isLoginFailed">Username or password incorrect</p>

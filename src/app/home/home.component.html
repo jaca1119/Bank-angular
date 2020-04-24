@@ -10,6 +10,9 @@
   </div>
   <nav >
     <div>
+      <div *ngFor="let account of accounts">
+          <h3>{{account.balance}}</h3>
+      </div>
       <p>Accounts:</p>
       <a [routerLink]="['account', '1']">First account #1</a>
       <a [routerLink]="['account', '2']">Second account #2</a>
@@ -17,6 +20,9 @@
         Operations:
       </p>
       <a>Transfer</a>
+      <div>
+        <a [routerLink]="['logout']">Logout</a>
+      </div>
     </div>
   </nav>
 </div>

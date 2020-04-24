@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDetailsService, UserData } from '../services/user-details/user-details.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  accounts = [];
+
+  constructor(private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
+    this.userDetailsService.fetchUserData()
+    .subscribe((data: UserData) => {
+      console.warn(data);
+      this.accounts = data.accounts;
+    })
+    
   }
 
   openPanel() {

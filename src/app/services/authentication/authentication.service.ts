@@ -10,12 +10,8 @@ export class AuthenticationService {
   constructor() { }
 
   authenticate(username: string, password: string) {
-    
-    let isAuthenticationSucessful = false;
     let json = JSON.stringify({username, password});
-    console.warn(json);
     
-
     return fetch(API_URL + '/authenticate', {
         method: "POST",
         credentials: 'include',
@@ -25,27 +21,31 @@ export class AuthenticationService {
         body: json
       })
       .then(response => {
-        console.warn(response);
+        console.log(response);
         return response;
+      })
+      .catch(exception => {
+        console.warn(exception);
+        return exception;
       });
+  }
 
-    // var req = new XMLHttpRequest();
-    // req.open('POST', API_URL + '/authenticate', true);
-    // req.setRequestHeader("Content-Type", "application/json");
-    // req.withCredentials = true;
-    // req.onreadystatechange = function (aEvt) {
-    //     if (req.readyState === 4) {
-    //         if(req.status === 200) {
-    //             console.log(req.responseText);
-    //             isAuthenticationSucessful = true;
-    //         }
-    //         else
-    //             console.log("Error loading site");
-    //     }
-    // };
-
-    // req.send(JSON.stringify({username, password}));
-
+  refreshToken() {
+    return fetch(API_URL + '/refresh-token', {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => {
+      console.log(response);
+      return response;
+    })
+    .catch(exception => {
+      console.warn(exception);
+      return exception;
+    });
   }
 
 }

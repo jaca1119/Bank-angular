@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
     .then(response => {
+      console.warn(response);
       if (response.ok) {
         this.router.navigateByUrl('/auth');
       } else {
@@ -41,6 +42,10 @@ export class LoginComponent implements OnInit {
 
   onRegistrationClick() {
     this.router.navigateByUrl('/register');
+  }
+
+  refreshToken() {
+    this.authService.refreshToken();
   }
 
 }
