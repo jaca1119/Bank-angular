@@ -27,7 +27,7 @@ export class UserDetailsService {
 
   constructor(private http: HttpClient ) { }
 
-  fetchUserData() {
+  getUserData() {
     return this.http.get<UserData>(API_URL + "/user-data", {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
       withCredentials: true
