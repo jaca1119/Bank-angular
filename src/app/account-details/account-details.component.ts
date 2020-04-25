@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserDetailsService, Account } from '../services/user-details/user-details.service';
 
 @Component({
   selector: 'app-account-details',
@@ -7,13 +8,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
-  account: string;
+  account: Account;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.account = 'Account #' + params.get('accountId');
+      let accountId = params.get('accountId');
+      this.account = this.userDetailsService.userData.accounts[accountId];
     })
   }
 

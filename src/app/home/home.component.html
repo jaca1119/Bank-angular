@@ -10,12 +10,10 @@
   </div>
   <nav >
     <div>
-      <div *ngFor="let account of accounts">
-          <h3>{{account.balance}}</h3>
-      </div>
       <p>Accounts:</p>
-      <a [routerLink]="['account', '1']">First account #1</a>
-      <a [routerLink]="['account', '2']">Second account #2</a>
+      <div *ngIf="userData">
+        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', i]">Account name #{{i + 1}}</a>
+      </div>
       <p>
         Operations:
       </p>
@@ -28,8 +26,8 @@
 </div>
 
 <main>
-  <div class="personal">
-    Name Surname #x
+  <div *ngIf="userData" class="personal">
+    {{userData.username}} #{{userData.id}}
   </div>
 
   <div class="options">

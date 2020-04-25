@@ -110,5 +110,6 @@ main {
 
     main {
         margin-left: unset;
+        width: 100%;
     }
 }

@@ -23,7 +23,7 @@ export interface UserData {
   providedIn: 'root'
 })
 export class UserDetailsService {
-
+  userData: UserData;
 
   constructor(private http: HttpClient ) { }
 
@@ -31,6 +31,10 @@ export class UserDetailsService {
     return this.http.get<UserData>(API_URL + "/user-data", {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
       withCredentials: true
+    }).toPromise()
+    .then(data => {
+      this.userData = data;
+      return data;
     });
   }
 

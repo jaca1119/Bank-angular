@@ -8,14 +8,16 @@ import { UserDetailsService, UserData } from '../services/user-details/user-deta
 })
 export class HomeComponent implements OnInit {
 
-  accounts = [];
+  userData: UserData;
+  isDataLoaded = false;
 
   constructor(private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
     this.userDetailsService.getUserData()
-    .subscribe((data: UserData) => {
-      this.accounts = data.accounts;
+    .then((data: UserData) => {
+      this.userData = data;
+      this.isDataLoaded = true;
     })
     
   }
