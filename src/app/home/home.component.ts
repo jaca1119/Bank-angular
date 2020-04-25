@@ -13,17 +13,14 @@ export class HomeComponent implements OnInit {
   constructor(private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
-    this.userDetailsService.fetchUserData()
+    this.userDetailsService.getUserData()
     .subscribe((data: UserData) => {
-      console.warn(data);
       this.accounts = data.accounts;
     })
     
   }
 
-  openPanel() {
-    console.warn(document.getElementById("sideNav"));
-    
+  openPanel() {    
     document.getElementById("sideNav").classList.add("open");
   }
 

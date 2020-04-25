@@ -30,14 +30,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
-    .then(response => {
-      console.warn(response);
-      if (response.ok) {
+    .finally(() => {
+      this.isLoginFailed = !this.authService.isLoggedIn;
+
+      if (!this.isLoginFailed) {
         this.router.navigateByUrl('/auth');
-      } else {
-        this.isLoginFailed = true;
       }
-    })
+    });
   }
 
   onRegistrationClick() {
