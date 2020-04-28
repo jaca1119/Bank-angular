@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const API_URL = "https://bank-app-spring.herokuapp.com";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class AuthenticationService {
   authenticate(username: string, password: string) {
     let json = JSON.stringify({username, password});
 
-      return this.http.post(API_URL + "/authenticate", json, {
+      return this.http.post(environment.API_KEY + "/authenticate", json, {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
         observe: 'response',
         withCredentials: true,
@@ -32,7 +31,7 @@ export class AuthenticationService {
   }
 
   refreshToken() {
-    return fetch(API_URL + '/refresh-token', {
+    return fetch(environment.API_KEY + '/refresh-token', {
       method: "GET",
       credentials: 'include',
       headers: {

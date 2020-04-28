@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
-const API_URL = "https://bank-app-spring.herokuapp.com";
-// const API_URL = "http://localhost:8080";
+import { environment } from "../../../environments/environment";
 
 interface RegistrationData {
   username: String,
@@ -20,7 +18,7 @@ constructor() { }
     console.warn(JSON.stringify(registrationData));
 
     var req = new XMLHttpRequest();
-    req.open('POST', API_URL + '/register', true);
+    req.open('POST', environment.API_KEY + '/register', true);
     req.setRequestHeader("Content-Type", "application/json");
     req.withCredentials = true;
     req.onreadystatechange = function (aEvt) {

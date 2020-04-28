@@ -18,8 +18,7 @@ export class HomeComponent implements OnInit {
     .then((data: UserData) => {
       this.userData = data;
       this.isDataLoaded = true;
-    })
-    
+    });
   }
 
   openPanel() {    

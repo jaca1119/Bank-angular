@@ -1,0 +1,36 @@
+<p>
+  transfer works!
+</p>
+<h3>Internal transfer</h3>
+
+<select>
+  <option>Internal</option>
+</select>
+
+<form [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
+
+  <label for="from">
+    From account:
+  </label>
+  <select id="from" formControlName="accountFrom">
+    <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId" [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
+    {{account.balanceInHundredScale / 100}} 
+    </option>
+  </select>
+
+  <label for="to">
+    To account:
+  </label>
+  <select id="to" formControlName="accountTo">
+    <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId" [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
+    {{account.balanceInHundredScale / 100}} 
+    </option>
+  </select>
+
+  <label for="amount">
+    Amount:
+  </label>
+  <input id="amount" type="number" formControlName="amount">
+
+  <button type="submit">Submit</button>
+</form>

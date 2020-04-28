@@ -1,4 +1,9 @@
-<p>
+<div>
   account-details works!
-  {{account.balance}} {{account.currency}} #{{account.accountBusinessId}}
-</p>
+
+  <div *ngIf="account">
+  
+    {{account.balanceInHundredScale / 100}} {{account.currency}} #{{account.accountBusinessId}}
+
+  </div>
+</div>

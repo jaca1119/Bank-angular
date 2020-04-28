@@ -15,6 +15,7 @@ export class AccountDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       let accountId = params.get('accountId');
+      
       this.account = this.userDetailsService.userData.accounts[accountId];
     })
   }

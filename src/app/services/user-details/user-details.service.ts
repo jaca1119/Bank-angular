@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-
-const API_URL = "https://bank-app-spring.herokuapp.com";
+import { environment } from "../../../environments/environment";
 
 export interface Account {
   accountBusinessId: string,
-  balance: number,
+  balanceInHundredScale: number,
   currency: string,
   id: number
 }
@@ -27,15 +26,15 @@ export class UserDetailsService {
 
   constructor(private http: HttpClient ) { }
 
-  getUserData() {
-    return this.http.get<UserData>(API_URL + "/user-data", {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  async getUserData() {
+    const data = await this.http.get<UserData>(environment.API_KEY + "/user-data", {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
-    }).toPromise()
-    .then(data => {
-      this.userData = data;
-      return data;
-    });
+    }).toPromise();
+
+    this.userData = data;
+    
+    return data;
   }
 
 }
