@@ -31,10 +31,20 @@ export class UserDetailsService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
     }).toPromise();
+    console.warn("GetUserData");
+    
 
     this.userData = data;
     
     return data;
   }
+
+  updateUserData() {
+    console.warn("Updating user data");
+    
+    this.getUserData();
+  }
+
+
 
 }

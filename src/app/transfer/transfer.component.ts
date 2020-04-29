@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, NgZone } from '@angular/core';
 import { UserDetailsService, Account } from '../services/user-details/user-details.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,7 +16,8 @@ export class TransferComponent implements OnInit {
   constructor(
     private userDetailsService: UserDetailsService,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private ngZone: NgZone
     ) {
       this.transferGroup = formBuilder.group({
         accountFrom: '',
@@ -27,6 +28,13 @@ export class TransferComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.warn("Init");
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.warn(changes);
+    console.warn("Changes");
   }
 
   onSubmit() {
@@ -37,9 +45,15 @@ export class TransferComponent implements OnInit {
     this.http.post(environment.API_KEY + "/transfer", transferDTO ,{
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true,
+      observe: 'response',
+      responseType: 'text'
     }).subscribe(response => {
-      console.warn(response);
-    })
+      this.ngZone.run(() => {
+        if (response.ok) {
+          this.userDetailsService.getUserData();
+        }
+      });
+    });
 
   }
 
@@ -53,6 +67,14 @@ export class TransferComponent implements OnInit {
       zone: Intl.DateTimeFormat().resolvedOptions().timeZone 
     };
     return transferDTO
+  }
+
+  updateUserData() {
+    this.userDetailsService.getUserData()
+    .then(response => {
+
+    });
+
   }
 
 }

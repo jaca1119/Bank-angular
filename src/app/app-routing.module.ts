@@ -15,6 +15,7 @@ if (environment.production) {
     path: 'auth',
     component: HomeComponent,
     canActivate: [AuthGuard],
+    
     children: [
     { path: 'account/:accountId', component: AccountDetailsComponent },
     { path: 'transfer', component: TransferComponent }
@@ -39,7 +40,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { enableTracing: true }
+    { enableTracing: true,
+      onSameUrlNavigation: "reload" }
   )],
   exports: [RouterModule]
 })
