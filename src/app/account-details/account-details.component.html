@@ -1,9 +1,15 @@
 <div>
   account-details works!
 
-  <div *ngIf="account">
+  <!-- <div *ngIf="account">
   
     {{account.balanceInHundredScale / 100}} {{account.currency}} #{{account.accountBusinessId}}
 
+  </div> -->
+  <div>
+    <p *ngFor="let account of (account | async)?.accounts">
+      {{account.balanceInHundredScale / 100}} {{account.currency}} #{{account.accountBusinessId}}
+    </p>
+    <!-- {{(account.accounts[0] | async)}} -->
   </div>
 </div>

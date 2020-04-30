@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDetailsService, UserData } from '../services/user-details/user-details.service';
+import { share } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +10,13 @@ import { UserDetailsService, UserData } from '../services/user-details/user-deta
 })
 export class HomeComponent implements OnInit {
 
-  userData: UserData;
+  userData: Observable<UserData>;
   isDataLoaded = false;
 
   constructor(private userDetailsService: UserDetailsService) { }
 
-  ngOnInit() {
-    this.userDetailsService.getUserData()
-    .then((data: UserData) => {
-      this.userData = data;
-      this.isDataLoaded = true;
-    });
+  ngOnInit() {  
+    this.userData = this.userDetailsService.getUserData();
   }
 
   openPanel() {    

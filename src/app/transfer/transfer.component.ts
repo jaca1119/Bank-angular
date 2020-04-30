@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, NgZone } from '@angular/core';
-import { UserDetailsService, Account } from '../services/user-details/user-details.service';
+import { UserDetailsService, Account, UserData } from '../services/user-details/user-details.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../environments/environment";
@@ -24,17 +24,11 @@ export class TransferComponent implements OnInit {
         accountTo: '',
         amount: 0
       })
-      this.accounts = userDetailsService.userData.accounts;
    }
 
   ngOnInit() {
     console.warn("Init");
-
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.warn(changes);
-    console.warn("Changes");
+    
   }
 
   onSubmit() {
@@ -50,7 +44,7 @@ export class TransferComponent implements OnInit {
     }).subscribe(response => {
       this.ngZone.run(() => {
         if (response.ok) {
-          this.userDetailsService.getUserData();
+          // this.userDetailsService.getUserData();
         }
       });
     });
@@ -69,12 +63,12 @@ export class TransferComponent implements OnInit {
     return transferDTO
   }
 
-  updateUserData() {
-    this.userDetailsService.getUserData()
-    .then(response => {
+  // updateUserData() {
+  //   this.userDetailsService.getUserData()
+  //   .then(response => {
 
-    });
+  //   });
 
-  }
+  // }
 
 }

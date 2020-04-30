@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserDetailsService, Account } from '../services/user-details/user-details.service';
+import { UserDetailsService, Account, UserData } from '../services/user-details/user-details.service';
+import { share } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-account-details',
@@ -8,16 +10,18 @@ import { UserDetailsService, Account } from '../services/user-details/user-detai
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
-  account: Account;
+  account: Observable<UserData>;
 
   constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
+    console.warn("Account details");
+    
     this.route.paramMap.subscribe(params => {
       let accountId = params.get('accountId');
-      
-      this.account = this.userDetailsService.userData.accounts[accountId];
-    })
+
+      this.account = this.userDetailsService.getUserData();
+    });
   }
 
 }
