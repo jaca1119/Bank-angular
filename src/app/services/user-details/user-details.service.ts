@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { catchError, retry, share, map, shareReplay } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
 
@@ -8,7 +8,7 @@ export interface Account {
   accountBusinessId: string,
   balanceInHundredScale: number,
   currency: string,
-  id: number
+  id: string
 }
 
 export interface UserData {
@@ -22,14 +22,19 @@ export interface UserData {
   providedIn: 'root'
 })
 export class UserDetailsService {
+  private userDataSubject = new ReplaySubject<UserData>(1);
+
+  userData$: Observable<UserData> = this.userDataSubject.asObservable();
+
 
   constructor(private http: HttpClient ) { }
 
   getUserData() {
-    return this.http.get<UserData>(environment.API_KEY + "/user-data", {
+    this.http.get<UserData>(environment.API_KEY + "/user-data", {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
-    }).pipe(shareReplay(2));
+    })
+    .subscribe(userData => this.userDataSubject.next(userData));
   }
 
   updateUserData() {

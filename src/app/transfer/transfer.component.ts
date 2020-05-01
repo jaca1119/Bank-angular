@@ -28,7 +28,9 @@ export class TransferComponent implements OnInit {
 
   ngOnInit() {
     console.warn("Init");
-    
+    this.userDetailsService.userData$.subscribe(userData => {
+      this.accounts = userData.accounts;
+    });
   }
 
   onSubmit() {
@@ -42,11 +44,9 @@ export class TransferComponent implements OnInit {
       observe: 'response',
       responseType: 'text'
     }).subscribe(response => {
-      this.ngZone.run(() => {
-        if (response.ok) {
-          // this.userDetailsService.getUserData();
-        }
-      });
+      if (response.ok) {
+        this.userDetailsService.getUserData();
+      }
     });
 
   }

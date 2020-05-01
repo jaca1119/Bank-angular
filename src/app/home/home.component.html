@@ -12,7 +12,7 @@
     <div>
       <p>Accounts:</p>
       <div *ngIf="userData">
-        <a *ngFor="let account of (userData | async)?.accounts; index as i" [routerLink]="['account', i]">Account name #{{i + 1}}</a>
+        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', i]">Account name #{{i + 1}}</a>
       </div>
       <p>
         Operations:
@@ -29,7 +29,7 @@
 
 <main>
   <div *ngIf="userData" class="personal">
-    <!-- {{userData.username}} #{{userData.id}} -->
+    {{userData.username}} #{{userData.id}}
   </div>
 
   <div class="options">

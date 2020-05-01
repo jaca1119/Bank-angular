@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDetailsService, Account, UserData } from '../services/user-details/user-details.service';
-import { share } from 'rxjs/operators';
+import { share, map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
-  account: Observable<UserData>;
+  account$: Observable<Account>;
+  account: Account;
 
   constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
@@ -20,7 +21,9 @@ export class AccountDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       let accountId = params.get('accountId');
 
-      this.account = this.userDetailsService.getUserData();
+      this.userDetailsService.userData$.subscribe(userData => {
+        this.account = userData.accounts[accountId];
+      });
     });
   }
 
