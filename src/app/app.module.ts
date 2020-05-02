@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { RegisterComponent } from './register/register.component';
 import { TransferComponent } from './transfer/transfer.component';
+import { InternalComponent } from './internal/internal.component';
+import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
 
 @NgModule({
    declarations: [
@@ -18,7 +20,9 @@ import { TransferComponent } from './transfer/transfer.component';
       HomeComponent,
       AccountDetailsComponent,
       RegisterComponent,
-      TransferComponent
+      TransferComponent,
+      InternalComponent,
+      ForeignDomesticComponent
    ],
    imports: [
       BrowserModule,

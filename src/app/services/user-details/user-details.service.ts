@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable, throwError, ReplaySubject } from 'rxjs';
+import { catchError, retry, share, map, shareReplay } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
+import { ITransfer } from './Transfer';
 
 export interface Account {
   accountBusinessId: string,
   balanceInHundredScale: number,
   currency: string,
-  id: number
+  id: string
 }
 
 export interface UserData {
@@ -22,19 +23,26 @@ export interface UserData {
   providedIn: 'root'
 })
 export class UserDetailsService {
-  userData: UserData;
+  private userDataSubject = new ReplaySubject<UserData>(1);
+
+  userData$: Observable<UserData> = this.userDataSubject.asObservable();
+
 
   constructor(private http: HttpClient ) { }
 
-  async getUserData() {
-    const data = await this.http.get<UserData>(environment.API_KEY + "/user-data", {
+  getUserData() {
+    this.http.get<UserData>(environment.API_KEY + "/user-data", {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
-    }).toPromise();
-
-    this.userData = data;
-    
-    return data;
+    })
+    .subscribe(userData => this.userDataSubject.next(userData));
   }
 
+  getAccountTransfers(accountId: string) {
+    return this.http.get<ITransfer>(`${environment.API_KEY}/account/${accountId}/transfers`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true
+    });
+  }
+  
 }
