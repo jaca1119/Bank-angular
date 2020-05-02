@@ -21,6 +21,7 @@ export class InternalComponent implements OnInit {
       this.transferGroup = formBuilder.group({
         accountFrom: '',
         accountTo: '',
+        message: '',
         amount: 0
       })
    }
@@ -50,6 +51,7 @@ export class InternalComponent implements OnInit {
     let transferDTO = {
       from: formValue.accountFrom,
       to: formValue.accountTo,
+      message: formValue.message,
       amountInHundredScale: formValue.amount * 100,
       transferDateTime: Date.now(),
       transferType: "INTERNAL",

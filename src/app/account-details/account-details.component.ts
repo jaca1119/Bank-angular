@@ -10,18 +10,24 @@ import { Observable } from 'rxjs';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
-  account$: Observable<Account>;
   account: Account;
+  transfers;
 
   constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
       this.route.paramMap.subscribe(params => {
-      let accountId = params.get('accountId');
+        let accountId = params.get('accountId');
 
-      this.userDetailsService.userData$.subscribe(userData => {
-        this.account = userData.accounts[accountId];
+        this.userDetailsService.userData$.subscribe(userData => {
+          this.account = userData.accounts.find(account => account.id == accountId);
       });
+
+      this.userDetailsService.getAccountTransfers(accountId).subscribe(accountTransfers => {
+        console.warn(accountTransfers.content);
+        this.transfers = accountTransfers.content;
+      })
+
     });
   }
 

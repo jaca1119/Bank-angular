@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { catchError, retry, share, map, shareReplay } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
+import { ITransfer } from './Transfer';
 
 export interface Account {
   accountBusinessId: string,
@@ -37,10 +38,11 @@ export class UserDetailsService {
     .subscribe(userData => this.userDataSubject.next(userData));
   }
 
-  updateUserData() {
-    console.warn("Updating user data");
-    
-    this.getUserData();
+  getAccountTransfers(accountId: string) {
+    return this.http.get<ITransfer>(`${environment.API_KEY}/account/${accountId}/transfers`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true
+    });
   }
   
 }

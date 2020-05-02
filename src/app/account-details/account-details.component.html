@@ -6,5 +6,21 @@
     {{account.balanceInHundredScale / 100}} {{account.currency}} #{{account.accountBusinessId}}
 
   </div>
-  
+  <div *ngIf="transfers">
+    <div *ngFor="let transfer of transfers">
+      <div>
+        From: {{transfer.from}}
+      </div>
+      <div>
+        To: {{transfer.to}}
+      </div>
+      <div>
+        Message: {{transfer.message}}
+      </div>
+      <div>
+        Amount: {{transfer.amountInHundredScale / 100}}
+      </div>
+    </div>
+  </div>
+
 </div>
