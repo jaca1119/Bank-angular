@@ -16,9 +16,7 @@ export class AccountDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
-    console.warn("Account details");
-    
-    this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe(params => {
       let accountId = params.get('accountId');
 
       this.userDetailsService.userData$.subscribe(userData => {

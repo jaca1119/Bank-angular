@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDetailsService, Account } from '../services/user-details/user-details.service';
+import { UserDetailsService, Account } from 'src/app/services/user-details/user-details.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from "../../environments/environment";
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-transfer',
-  templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.css']
+  selector: 'app-internal',
+  templateUrl: './internal.component.html',
+  styleUrls: ['./internal.component.css']
 })
-export class TransferComponent implements OnInit {
+export class InternalComponent implements OnInit {
   accounts: Account[];
   transferGroup: FormGroup;
 
@@ -27,13 +27,11 @@ export class TransferComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailsService.userData$.subscribe(userData => {
-      this.accounts = userData.accounts;
+      this.accounts = userData.accounts
     });
   }
 
   onSubmit() {
-    console.warn("Submit transfer");
-    console.warn(this.transferGroup.value);
     let transferDTO = this.createTransferDTO(this.transferGroup.value);
 
     this.http.post(environment.API_KEY + "/transfer", transferDTO ,{
@@ -46,7 +44,6 @@ export class TransferComponent implements OnInit {
         this.userDetailsService.getUserData();
       }
     });
-
   }
 
   createTransferDTO(formValue) {
@@ -60,13 +57,5 @@ export class TransferComponent implements OnInit {
     };
     return transferDTO
   }
-
-  // updateUserData() {
-  //   this.userDetailsService.getUserData()
-  //   .then(response => {
-
-  //   });
-
-  // }
 
 }

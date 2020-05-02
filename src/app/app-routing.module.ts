@@ -7,6 +7,8 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TransferComponent } from './transfer/transfer.component';
 import { environment } from "../environments/environment";
+import { InternalComponent } from './internal/internal.component';
+import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
 
 let authPath;
 
@@ -18,7 +20,10 @@ if (environment.production) {
     
     children: [
     { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent }
+    { path: 'transfer', component: TransferComponent, children: [
+      { path: 'internal', component: InternalComponent },
+      { path: 'fordom', component: ForeignDomesticComponent }
+    ] }
   ]};
 } else {
   authPath = { 
@@ -26,8 +31,11 @@ if (environment.production) {
     component: HomeComponent,
     children: [
     { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent }
-  ]}
+    { path: 'transfer', component: TransferComponent, children: [
+      { path: 'internal', component: InternalComponent },
+      { path: 'fordom', component: ForeignDomesticComponent }
+    ]}
+  ]};
 }
 
 const routes: Routes = [
@@ -40,8 +48,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { enableTracing: true,
-      onSameUrlNavigation: "reload" }
+    { enableTracing: true }
   )],
   exports: [RouterModule]
 })
