@@ -16,11 +16,11 @@ export class AccountDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userDetailsService: UserDetailsService) { }
 
   ngOnInit() {
-      this.route.paramMap.subscribe(params => {
-        let accountId = params.get('accountId');
+    this.route.paramMap.subscribe(params => {
+      let accountId = params.get('accountId');
 
-        this.userDetailsService.userData$.subscribe(userData => {
-          this.account = userData.accounts.find(account => account.id == accountId);
+      this.userDetailsService.userData$.subscribe(userData => {
+        this.account = userData.accounts.find(account => account.id == accountId);
       });
 
       this.userDetailsService.getAccountTransfers(accountId).subscribe(accountTransfers => {

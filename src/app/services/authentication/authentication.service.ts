@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
-import { tap } from 'rxjs/operators';
+import { tap, shareReplay, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   authenticate(username: string, password: string) {
-    let json = JSON.stringify({username, password});
+    let json = JSON.stringify({ username, password });
 
     return this.http.post(environment.API_KEY + "/authenticate", json, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -23,9 +24,11 @@ export class AuthenticationService {
         if (response.status === 200) {
           sessionStorage.setItem('isLoggedIn', 'true');
         }
-        else {
-          sessionStorage.setItem('isLoggedIn', 'false');
-        }
+      }),
+      catchError(() => {
+        sessionStorage.setItem('isLoggedIn', 'false');
+
+        return of(null);
       }));
   }
 
@@ -37,14 +40,14 @@ export class AuthenticationService {
         'Content-Type': 'application/json'
       },
     })
-    .then(response => {
-      console.log(response);
-      return response;
-    })
-    .catch(exception => {
-      console.warn(exception);
-      return exception;
-    });
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .catch(exception => {
+        console.warn(exception);
+        return exception;
+      });
   }
 
   isLoggedIn(): boolean {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../../environments/environment";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface RegistrationData {
   username: String,
@@ -12,26 +13,17 @@ interface RegistrationData {
 })
 export class RegistrationService {
 
-constructor() { }
+  constructor(private http: HttpClient) { }
 
   register(registrationData: RegistrationData) {
     console.warn(JSON.stringify(registrationData));
 
-    var req = new XMLHttpRequest();
-    req.open('POST', environment.API_KEY + '/register', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.withCredentials = true;
-    req.onreadystatechange = function (aEvt) {
-        if (req.readyState === 4) {
-            if(req.status === 200) {
-                console.log(req.responseText);
-            }
-            else
-                console.log("Error loading site");
-        }
-    };
-
-    req.send(JSON.stringify(registrationData));
+    return this.http.post(`${environment.API_KEY}/register`, registrationData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      observe: 'response',
+      withCredentials: true,
+      responseType: 'text'
+    });
   }
 
 }

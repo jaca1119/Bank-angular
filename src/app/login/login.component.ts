@@ -19,25 +19,25 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private formBuilder: FormBuilder
-    ) {
-        this.loginForm = this.formBuilder.group({
-          username: '',
-          password: ''
-        });
-     }
+  ) {
+    this.loginForm = this.formBuilder.group({
+      username: '',
+      password: ''
+    });
+  }
 
   ngOnInit() {
   }
 
   onSubmit() {
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
-    .subscribe(() => {     
-      this.isLoginFailed = !this.authService.isLoggedIn();
+      .subscribe(() => {
+        this.isLoginFailed = !this.authService.isLoggedIn();
 
-      if (!this.isLoginFailed) {
-        this.router.navigateByUrl('/auth');
-      }
-    });
+        if (!this.isLoginFailed) {
+          this.router.navigateByUrl('/auth');
+        }
+      });
   }
 
   onRegistrationClick() {
