@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isLoggedIn = false;
 
   constructor(private http: HttpClient) { }
 
   authenticate(username: string, password: string) {
     let json = JSON.stringify({username, password});
 
-      return this.http.post(environment.API_KEY + "/authenticate", json, {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-        observe: 'response',
-        withCredentials: true,
-        responseType: 'text'
-      }).toPromise()
-      .then(response => {
-        if (response.ok) {
-          this.isLoggedIn = true;
+    return this.http.post(environment.API_KEY + "/authenticate", json, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      observe: 'response',
+      withCredentials: true,
+      responseType: 'text'
+    }).pipe(
+      tap(response => {
+        if (response.status === 200) {
+          sessionStorage.setItem('isLoggedIn', 'true');
         }
         else {
-          this.isLoggedIn = false;
+          sessionStorage.setItem('isLoggedIn', 'false');
         }
-        return response;
-      });
+      }));
   }
 
   refreshToken() {
@@ -46,6 +45,10 @@ export class AuthenticationService {
       console.warn(exception);
       return exception;
     });
+  }
+
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('isLoggedIn') === 'true';
   }
 
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
-    .finally(() => {
-      this.isLoginFailed = !this.authService.isLoggedIn;
+    .subscribe(() => {     
+      this.isLoginFailed = !this.authService.isLoggedIn();
 
       if (!this.isLoginFailed) {
         this.router.navigateByUrl('/auth');
