@@ -12,14 +12,15 @@
     <div>
       <p>Accounts:</p>
       <div *ngIf="userData">
-        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', account.id]">Account name
+        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', i]"
+          (click)="closePanel()">Account name
           #{{i + 1}}</a>
       </div>
       <p>
         Operations:
       </p>
 
-      <a [routerLink]="['transfer']">Transfer</a>
+      <a [routerLink]="['transfer']" (click)="closePanel()">Transfer</a>
 
       <div>
         <a [routerLink]="['logout']">Logout</a>

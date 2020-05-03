@@ -11,31 +11,43 @@ import { InternalComponent } from './internal/internal.component';
 import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
 
 let authPath;
+let enableTracing;
 
 if (environment.production) {
-  authPath = { 
+  authPath = {
     path: 'auth',
     component: HomeComponent,
     canActivate: [AuthGuard],
-    
+
     children: [
-    { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent, children: [
-      { path: 'internal', component: InternalComponent },
-      { path: 'fordom', component: ForeignDomesticComponent }
-    ] }
-  ]};
+      { path: 'account/:accountId', component: AccountDetailsComponent },
+      {
+        path: 'transfer', component: TransferComponent, children: [
+          { path: 'internal', component: InternalComponent },
+          { path: 'fordom', component: ForeignDomesticComponent }
+        ]
+      }
+    ]
+  };
+
+  enableTracing = { enableTracing: false };
+
 } else {
-  authPath = { 
+  authPath = {
     path: 'auth',
     component: HomeComponent,
     children: [
-    { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent, children: [
-      { path: 'internal', component: InternalComponent },
-      { path: 'fordom', component: ForeignDomesticComponent }
-    ]}
-  ]};
+      { path: 'account/:accountId', component: AccountDetailsComponent },
+      {
+        path: 'transfer', component: TransferComponent, children: [
+          { path: 'internal', component: InternalComponent },
+          { path: 'fordom', component: ForeignDomesticComponent }
+        ]
+      }
+    ]
+  };
+
+  enableTracing = { enableTracing: true };
 }
 
 const routes: Routes = [
@@ -48,7 +60,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { enableTracing: true }
+    enableTracing
   )],
   exports: [RouterModule]
 })

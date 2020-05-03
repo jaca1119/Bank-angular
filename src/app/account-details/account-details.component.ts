@@ -20,7 +20,7 @@ export class AccountDetailsComponent implements OnInit {
       let accountId = params.get('accountId');
 
       this.userDetailsService.userData$.subscribe(userData => {
-        this.account = userData.accounts.find(account => account.id == accountId);
+        this.account = userData.accounts[accountId];
       });
 
       this.userDetailsService.getAccountTransfers(accountId).subscribe(accountTransfers => {

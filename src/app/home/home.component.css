@@ -1,115 +1,114 @@
 div {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 
 
 .sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
 }
 
 
 .logo {
-    height: 100px;
-    background-color: white;
+  height: 100px;
+  background-color: white;
 }
 
 img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.sidenav nav {
+  height: 100%;
+  background-color: #111;
+  color: white;
+  overflow-x: hidden;
+
+}
+
+.sidenav a {
+  padding-left: 5px;
+  padding-bottom: 5px;
+  display: block;
+  text-decoration: none;
+  color: khaki;
+}
+
+.sidenav div {
+  padding-left: 10px;
+}
+
+main {
+  margin-left: 200px;
+  border: 1px solid red;
+  width: 50%;
+}
+
+.personal {
+  height: 100px;
+}
+
+.top {
+  display: none;
+  cursor: pointer;
+}
+
+.closebtn {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .sidenav {
+    height: 0;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+    top: -10px;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+
+  .open {
+    top: 0;
+    height: 90vh;
+  }
+
+  .closebtn {
+    display: unset;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 36px;
+    cursor: pointer;
+  }
+
+  .top {
+    display: block;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  img {
     margin-left: auto;
     margin-right: auto;
     height: 100%;
     display: block;
     z-index: 1;
-}
+  }
 
-.sidenav nav {
-    height: 100%;
-    background-color: #111;
-    color: white;
-    overflow-x: hidden;
-
-}
-
-.sidenav a {
-    padding-left: 5px;
-    padding-bottom: 5px;
-    display: block;
-    text-decoration: none;
-    color: khaki;
-}
-
-.sidenav div {
-    padding-left: 10px;
-}
-
-main {
-    margin-left: 200px;
-    border: 1px solid red;
-    width: 50%;
-}
-
-.personal {
-    height: 100px;
-}
-
-.top {
-    display: none;
-    cursor: pointer;
-}
-
-.closebtn {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .sidenav {
-        height: 0;
-        width: 100vw;
-        position: fixed;
-        z-index: 1;
-        top: -10px;
-        overflow-x: hidden;
-        transition: 0.5s;
-    }
-
-    .open {
-        top: 0;
-        height: 90vh;
-    }
-
-    .closebtn {
-        display: unset;
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 36px;
-        margin-left: 50px;
-        cursor: pointer;   
-    }
-
-    .top {
-        display: block;
-    }
-
-    .logo {
-        width: 100%;
-    }
-    
-    img {
-        margin-left: auto;
-        margin-right: auto;
-        height: 100%;
-        display: block;
-        z-index: 1;
-    }
-
-    main {
-        margin-left: unset;
-        width: 100%;
-    }
+  main {
+    margin-left: unset;
+    width: 100%;
+  }
 }

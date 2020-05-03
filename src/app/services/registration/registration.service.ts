@@ -16,8 +16,6 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   register(registrationData: RegistrationData) {
-    console.warn(JSON.stringify(registrationData));
-
     return this.http.post(`${environment.API_KEY}/register`, registrationData, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       observe: 'response',
