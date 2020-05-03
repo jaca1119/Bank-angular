@@ -8,18 +8,19 @@
   <div class="logo">
     <img src="assets/bank-logo.png" alt="bank-logo">
   </div>
-  <nav >
+  <nav>
     <div>
       <p>Accounts:</p>
       <div *ngIf="userData">
-        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', account.id]">Account name #{{i + 1}}</a>
+        <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', account.id]">Account name
+          #{{i + 1}}</a>
       </div>
       <p>
         Operations:
       </p>
 
       <a [routerLink]="['transfer']">Transfer</a>
-      
+
       <div>
         <a [routerLink]="['logout']">Logout</a>
       </div>
@@ -36,4 +37,3 @@
     <router-outlet></router-outlet>
   </div>
 </main>
-
