@@ -1,40 +1,41 @@
 <h3>Internal transfer</h3>
 
+<div class="container">
+  <form class="transfer" [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
 
-<form class="transfer" [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
+    <label for="from">
+      From account:
+    </label>
+    <select id="from" formControlName="accountFrom">
+      <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
+        [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
+        {{account.balanceInHundredScale / 100}}
+      </option>
+    </select>
 
-  <label for="from">
-    From account:
-  </label>
-  <select id="from" formControlName="accountFrom">
-    <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-      [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
-      {{account.balanceInHundredScale / 100}}
-    </option>
-  </select>
+    <label for="to">
+      To account:
+    </label>
+    <select id="to" formControlName="accountTo">
+      <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
+        [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
+        {{account.balanceInHundredScale / 100}}
+      </option>
+    </select>
 
-  <label for="to">
-    To account:
-  </label>
-  <select id="to" formControlName="accountTo">
-    <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-      [selected]="i == 0 ? true : null">{{account.accountBusinessId}}<br>
-      {{account.balanceInHundredScale / 100}}
-    </option>
-  </select>
+    <label for="amount">
+      Amount: [EUR]
+    </label>
+    <input id="amount" type="number" formControlName="amount">
 
-  <label for="amount">
-    Amount: [EUR]
-  </label>
-  <input id="amount" type="number" formControlName="amount">
+    <label for="message">
+      Message:
+    </label>
+    <input id="message" type="text" maxlength="60" formControlName="message">
 
-  <label for="message">
-    Message:
-  </label>
-  <input id="message" type="text" maxlength="60" formControlName="message">
-
-  <button type="submit">Submit</button>
-</form>
-<div>
-  Data
+    <button type="submit">Submit</button>
+  </form>
+  <div>
+    Data
+  </div>
 </div>

@@ -2,3 +2,19 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+
+
+.option {
+  font-size: large;
+  background-color: rgb(33, 34, 34);
+  box-shadow: 0px 0px 42px -13px rgba(0, 0, 0, 1);
+  padding: 10px;
+  text-decoration: none;
+  color: khaki;
+}
+
+.active {
+  color: rgb(243, 221, 26);
+  box-shadow: inset 0px 0px 39px -28px rgba(0, 0, 0, 0.75);
+}

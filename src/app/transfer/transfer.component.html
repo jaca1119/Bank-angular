@@ -1,8 +1,8 @@
 <p>Choose transfer type</p>
 
 <div class="options">
-  <a [routerLink]="['internal']">Internal transfer</a>
-  <a [routerLink]="['fordom']">Domestic transfer</a>
+  <a class="option" [routerLink]="['internal']" routerLinkActive="active">Internal transfer</a>
+  <a class="option" [routerLink]="['fordom']" routerLinkActive="active">Domestic transfer</a>
 </div>
 
 <router-outlet></router-outlet>
