@@ -3,8 +3,6 @@
   justify-content: space-evenly;
 }
 
-
-
 .option {
   font-size: large;
   background-color: rgb(33, 34, 34);
@@ -12,6 +10,10 @@
   padding: 10px;
   text-decoration: none;
   color: khaki;
+}
+
+.option:hover {
+  opacity: 0.9;
 }
 
 .active {

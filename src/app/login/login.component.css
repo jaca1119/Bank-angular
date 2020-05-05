@@ -46,14 +46,44 @@ div {
   flex-direction: column;
 }
 
+.container {
+  display: none;
+}
+
+.button {
+  font-weight: bold;
+  background-color: rgb(33, 34, 34);
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  text-decoration: none;
+  color: khaki;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+footer {
+  background-color: rgb(33, 34, 34);
+  color: khaki;
+  height: 10vh;
+}
+
 @media (max-width: 600px) {
   main {
-    margin-left: unset;
+    margin: unset;
     border: 1px solid red;
     width: unset;
   }
 
   .sidenav {
     display: none;
+  }
+
+  .container {
+    display: block;
+    height: 100px;
   }
 }

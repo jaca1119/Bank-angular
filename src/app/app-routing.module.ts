@@ -8,7 +8,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { TransferComponent } from './transfer/transfer.component';
 import { environment } from "../environments/environment";
 import { InternalComponent } from './internal/internal.component';
-import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
+import { DomesticComponent } from "./domestic/domestic.component";
 
 let authPath;
 let enableTracing;
@@ -24,7 +24,7 @@ if (environment.production) {
       {
         path: 'transfer', component: TransferComponent, children: [
           { path: 'internal', component: InternalComponent },
-          { path: 'fordom', component: ForeignDomesticComponent }
+          { path: 'domestic', component: DomesticComponent }
         ]
       }
     ]
@@ -41,7 +41,7 @@ if (environment.production) {
       {
         path: 'transfer', component: TransferComponent, children: [
           { path: 'internal', component: InternalComponent },
-          { path: 'fordom', component: ForeignDomesticComponent }
+          { path: 'domestic', component: DomesticComponent }
         ]
       }
     ]

@@ -6,6 +6,10 @@
   <nav></nav>
 </div>
 
+<div class="container">
+  <img class="logo-small" src="assets/bank-logo.png" alt="bank-logo">
+</div>
+
 <main>
   <div class="login">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -18,19 +22,19 @@
       <input id="password" type="password" formControlName="password">
       <br>
 
-      <button type="submit">Login</button>
+      <button class="button" type="submit">Login</button>
     </form>
 
     <div>
-      <p>Or register if you don't have account yet</p>
-      <button (click)="onRegistrationClick()">Register</button>
+      <p>Register if you don't have account yet</p>
+      <button class="button" (click)="onRegistrationClick()">Register</button>
     </div>
-    <button (click)="refreshToken()">RefreshToken</button>
   </div>
 
   <p *ngIf="isLoginFailed">Username or password incorrect</p>
 
   <footer>
-    Footer
+    Online banking system
+    © 2020
   </footer>
 </main>

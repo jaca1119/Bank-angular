@@ -11,7 +11,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
 import { RegisterComponent } from './register/register.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { InternalComponent } from './internal/internal.component';
-import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
+import { DomesticComponent } from './domestic/domestic.component';
 
 @NgModule({
    declarations: [
@@ -22,7 +22,7 @@ import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.co
       RegisterComponent,
       TransferComponent,
       InternalComponent,
-      ForeignDomesticComponent
+      DomesticComponent
    ],
    imports: [
       BrowserModule,

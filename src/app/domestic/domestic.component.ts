@@ -5,11 +5,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-foreign-domestic',
-  templateUrl: './foreign-domestic.component.html',
-  styleUrls: ['./foreign-domestic.component.css']
+  selector: 'app-domestic',
+  templateUrl: './domestic.component.html',
+  styleUrls: ['./domestic.component.css']
 })
-export class ForeignDomesticComponent implements OnInit {
+export class DomesticComponent implements OnInit {
   transferGroup: FormGroup;
   accounts: Account[];
 
@@ -24,18 +24,18 @@ export class ForeignDomesticComponent implements OnInit {
       message: '',
       amount: 0
     });
-   }
+  }
 
   ngOnInit() {
     this.userDetailsService.userData$.subscribe(userData => {
       this.accounts = userData.accounts
     });
   }
-  
+
   onSubmit() {
     let transferDTO = this.createTransferDTO(this.transferGroup.value);
 
-    this.http.post(environment.API_KEY + "/transfer", transferDTO ,{
+    this.http.post(environment.API_KEY + "/transfer", transferDTO, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true,
       observe: 'response',
@@ -55,7 +55,7 @@ export class ForeignDomesticComponent implements OnInit {
       amountInHundredScale: formValue.amount * 100,
       transferDateTime: Date.now(),
       transferType: "DOMESTIC",
-      zone: Intl.DateTimeFormat().resolvedOptions().timeZone 
+      zone: Intl.DateTimeFormat().resolvedOptions().timeZone
     };
     return transferDTO
   }
