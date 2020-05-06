@@ -1,6 +1,8 @@
 .options {
   display: flex;
   justify-content: space-evenly;
+  border-bottom: 2px solid darkred;
+  padding-bottom: 5px;
 }
 
 .option {

@@ -2,31 +2,34 @@
   Domestic transfer
 </h3>
 
-<form [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
+<div class="container">
+  <form class="transfer" [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
 
-  <label for="from">
-    From account:
-  </label>
-  <select id="from" formControlName="accountFrom">
-    <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId" [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.accountBusinessId}}<br>
-    {{account.balanceInHundredScale / 100}} 
-    </option>
-  </select>
+    <label for="from">
+      From account:
+    </label>
+    <select id="from" formControlName="accountFrom">
+      <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
+        [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.accountBusinessId}}<br>
+        {{account.balanceInHundredScale / 100}}
+      </option>
+    </select>
 
-  <label for="to">
-    To account:
-  </label>
-  <input id="to" type="text" formControlName="accountTo">
+    <label for="to">
+      To account:
+    </label>
+    <input id="to" type="text" formControlName="accountTo">
 
-  <label for="amount">
-    Amount:
-  </label>
-  <input id="amount" type="number" formControlName="amount">
+    <label for="amount">
+      Amount: [EUR]
+    </label>
+    <input id="amount" type="number" formControlName="amount">
 
-  <label for="message">
-    Message:
-  </label>
-  <input id="message" type="text" maxlength="60" formControlName="message">
+    <label for="message">
+      Message:
+    </label>
+    <input id="message" type="text" maxlength="60" formControlName="message">
 
-  <button type="submit">Submit</button>
-</form>
+    <button class="button" type="submit">Submit</button>
+  </form>
+</div>

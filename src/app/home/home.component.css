@@ -65,6 +65,12 @@ main {
   display: none;
 }
 
+footer {
+  background-color: rgb(33, 34, 34);
+  color: khaki;
+  height: 10vh;
+}
+
 @media (max-width: 600px) {
   .sidenav {
     height: 0;
