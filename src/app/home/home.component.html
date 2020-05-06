@@ -13,7 +13,7 @@
       <p>Accounts:</p>
       <div *ngIf="userData">
         <a *ngFor="let account of userData.accounts; index as i" [routerLink]="['account', i]"
-          (click)="closePanel()">Account name
+          (click)="closePanel()">{{account.name}}
           #{{i + 1}}</a>
       </div>
       <p>

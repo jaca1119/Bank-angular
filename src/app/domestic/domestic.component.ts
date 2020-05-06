@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDetailsService, Account } from '../services/user-details/user-details.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -22,7 +22,7 @@ export class DomesticComponent implements OnInit {
       accountFrom: '',
       accountTo: '',
       message: '',
-      amount: 0
+      amount: [0, Validators.min(1)]
     });
   }
 

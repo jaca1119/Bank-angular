@@ -10,8 +10,8 @@
     </label>
     <select id="from" formControlName="accountFrom">
       <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-        [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.accountBusinessId}}<br>
-        {{account.balanceInHundredScale / 100}}
+        [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}}
+        {{account.balanceInHundredScale / 100}} {{account.currency}}
       </option>
     </select>
 
@@ -23,7 +23,7 @@
     <label for="amount">
       Amount: [EUR]
     </label>
-    <input id="amount" type="number" formControlName="amount">
+    <input id="amount" type="number" min="1" step="1" formControlName="amount">
 
     <label for="message">
       Message:

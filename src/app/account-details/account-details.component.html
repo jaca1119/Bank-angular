@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="account">
 
-    <p>//account.name #{{account.accountBusinessId}}</p>
+    <p>{{account.name}} #{{account.accountBusinessId}}</p>
     <p>Balance: {{account.balanceInHundredScale / 100}} {{account.currency}}</p>
 
   </div>

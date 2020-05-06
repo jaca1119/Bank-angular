@@ -9,6 +9,7 @@ export interface Account {
   accountBusinessId: string,
   balanceInHundredScale: number,
   currency: string,
+  name: string,
   id: string
 }
 
@@ -28,14 +29,14 @@ export class UserDetailsService {
   userData$: Observable<UserData> = this.userDataSubject.asObservable();
 
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   getUserData() {
     this.http.get<UserData>(environment.API_KEY + "/user-data", {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
     })
-    .subscribe(userData => this.userDataSubject.next(userData));
+      .subscribe(userData => this.userDataSubject.next(userData));
   }
 
   getAccountTransfers(accountId: string) {
@@ -44,5 +45,5 @@ export class UserDetailsService {
       withCredentials: true
     });
   }
-  
+
 }
