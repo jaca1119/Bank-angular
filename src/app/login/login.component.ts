@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = !this.authService.isLoggedIn();
 
         if (!this.isLoginFailed) {
-          this.router.navigateByUrl('/auth/account/0');
+          this.router.navigateByUrl('/auth');
         }
       });
   }

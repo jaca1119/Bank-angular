@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, ReplaySubject } from 'rxjs';
-import { catchError, retry, share, map, shareReplay } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
 import { ITransfer } from './Transfer';
 
