@@ -6,20 +6,7 @@
 
   </div>
   <div *ngIf="transfers">
-    <div *ngFor="let transfer of transfers">
-      <div>
-        From: {{transfer.from}}
-      </div>
-      <div>
-        To: {{transfer.to}}
-      </div>
-      <div>
-        Message: {{transfer.message}}
-      </div>
-      <div>
-        Amount: {{transfer.amountInHundredScale / 100}}
-      </div>
-    </div>
+    <app-transfer-details *ngFor="let transfer of transfers" [transfer]="transfer"></app-transfer-details>
   </div>
 
 </div>
