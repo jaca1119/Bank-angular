@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, ReplaySubject } from 'rxjs';
-import { catchError, retry, share, map, shareReplay } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { ITransfer } from './Transfer';
+import { ITransfer } from './ITransfer';
 
 export interface Account {
   accountBusinessId: string,
   balanceInHundredScale: number,
   currency: string,
+  name: string,
   id: string
 }
 
@@ -28,14 +28,14 @@ export class UserDetailsService {
   userData$: Observable<UserData> = this.userDataSubject.asObservable();
 
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   getUserData() {
     this.http.get<UserData>(environment.API_KEY + "/user-data", {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
     })
-    .subscribe(userData => this.userDataSubject.next(userData));
+      .subscribe(userData => this.userDataSubject.next(userData));
   }
 
   getAccountTransfers(accountId: string) {
@@ -44,5 +44,5 @@ export class UserDetailsService {
       withCredentials: true
     });
   }
-  
+
 }

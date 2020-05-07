@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ForeignDomesticComponent } from './foreign-domestic.component';
+import { TransferDetailsComponent } from './transfer-details.component';
 
-describe('ForeignDomesticComponent', () => {
-  let component: ForeignDomesticComponent;
-  let fixture: ComponentFixture<ForeignDomesticComponent>;
+describe('TransferDetailsComponent', () => {
+  let component: TransferDetailsComponent;
+  let fixture: ComponentFixture<TransferDetailsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForeignDomesticComponent ]
+      declarations: [ TransferDetailsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForeignDomesticComponent);
+    fixture = TestBed.createComponent(TransferDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

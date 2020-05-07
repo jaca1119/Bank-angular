@@ -1,26 +1,16 @@
 <div>
-  account-details works!
-
   <div *ngIf="account">
-  
-    {{account.balanceInHundredScale / 100}} {{account.currency}} #{{account.accountBusinessId}}
+
+    <p>Name: {{account.name}} </p>
+    <p>Account id: #{{account.accountBusinessId}}</p>
+    <p>Balance: {{account.balanceInHundredScale / 100}} {{account.currency}}</p>
 
   </div>
+  <div>
+    Latest transactions:
+  </div>
   <div *ngIf="transfers">
-    <div *ngFor="let transfer of transfers">
-      <div>
-        From: {{transfer.from}}
-      </div>
-      <div>
-        To: {{transfer.to}}
-      </div>
-      <div>
-        Message: {{transfer.message}}
-      </div>
-      <div>
-        Amount: {{transfer.amountInHundredScale / 100}}
-      </div>
-    </div>
+    <app-transfer-details *ngFor="let transfer of transfers" [transfer]="transfer"></app-transfer-details>
   </div>
 
 </div>
