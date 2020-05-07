@@ -1,9 +1,13 @@
 <div>
   <div *ngIf="account">
 
-    <p>{{account.name}} #{{account.accountBusinessId}}</p>
+    <p>Name: {{account.name}} </p>
+    <p>Account id: #{{account.accountBusinessId}}</p>
     <p>Balance: {{account.balanceInHundredScale / 100}} {{account.currency}}</p>
 
+  </div>
+  <div>
+    Latest transactions:
   </div>
   <div *ngIf="transfers">
     <app-transfer-details *ngFor="let transfer of transfers" [transfer]="transfer"></app-transfer-details>

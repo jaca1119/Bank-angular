@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { environment } from "../../../environments/environment";
-import { ITransfer } from './Transfer';
+import { ITransfer } from './ITransfer';
 
 export interface Account {
   accountBusinessId: string,
