@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDetailsService, Account } from 'src/app/services/user-details/user-details.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -17,14 +17,14 @@ export class InternalComponent implements OnInit {
     private userDetailsService: UserDetailsService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    ) {
-      this.transferGroup = formBuilder.group({
-        accountFrom: '',
-        accountTo: '',
-        message: '',
-        amount: 0
-      })
-   }
+  ) {
+    this.transferGroup = formBuilder.group({
+      accountFrom: [''],
+      accountTo: [''],
+      message: [''],
+      amount: ['', Validators.min(1)]
+    })
+  }
 
   ngOnInit() {
     this.userDetailsService.userData$.subscribe(userData => {
@@ -35,16 +35,18 @@ export class InternalComponent implements OnInit {
   onSubmit() {
     let transferDTO = this.createTransferDTO(this.transferGroup.value);
 
-    this.http.post(environment.API_KEY + "/transfer", transferDTO ,{
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      withCredentials: true,
-      observe: 'response',
-      responseType: 'text'
-    }).subscribe(response => {
-      if (response.ok) {
-        this.userDetailsService.getUserData();
-      }
-    });
+    if (this.transferGroup.valid) {
+      this.http.post(environment.API_KEY + "/transfer", transferDTO, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true,
+        observe: 'response',
+        responseType: 'text'
+      }).subscribe(response => {
+        if (response.ok) {
+          this.userDetailsService.getUserData();
+        }
+      });
+    }
   }
 
   createTransferDTO(formValue) {
@@ -55,7 +57,7 @@ export class InternalComponent implements OnInit {
       amountInHundredScale: formValue.amount * 100,
       transferDateTime: Date.now(),
       transferType: "INTERNAL",
-      zone: Intl.DateTimeFormat().resolvedOptions().timeZone 
+      zone: Intl.DateTimeFormat().resolvedOptions().timeZone
     };
     return transferDTO
   }

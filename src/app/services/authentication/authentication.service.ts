@@ -1,33 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
+import { tap, shareReplay, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isLoggedIn = false;
 
   constructor(private http: HttpClient) { }
 
   authenticate(username: string, password: string) {
-    let json = JSON.stringify({username, password});
+    let json = JSON.stringify({ username, password });
 
-      return this.http.post(environment.API_KEY + "/authenticate", json, {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-        observe: 'response',
-        withCredentials: true,
-        responseType: 'text'
-      }).toPromise()
-      .then(response => {
-        if (response.ok) {
-          this.isLoggedIn = true;
+    return this.http.post(environment.API_KEY + "/authenticate", json, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      observe: 'response',
+      withCredentials: true,
+      responseType: 'text'
+    }).pipe(
+      tap(response => {
+        if (response.status === 200) {
+          sessionStorage.setItem('isLoggedIn', 'true');
         }
-        else {
-          this.isLoggedIn = false;
-        }
-        return response;
-      });
+      }),
+      catchError(() => {
+        sessionStorage.setItem('isLoggedIn', 'false');
+
+        return of(null);
+      }));
   }
 
   refreshToken() {
@@ -38,14 +40,18 @@ export class AuthenticationService {
         'Content-Type': 'application/json'
       },
     })
-    .then(response => {
-      console.log(response);
-      return response;
-    })
-    .catch(exception => {
-      console.warn(exception);
-      return exception;
-    });
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .catch(exception => {
+        console.warn(exception);
+        return exception;
+      });
+  }
+
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('isLoggedIn') === 'true';
   }
 
 }

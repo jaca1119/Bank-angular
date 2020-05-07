@@ -1,4 +1,6 @@
-<h3>Internal transfer</h3>
+<h3>
+  Domestic transfer
+</h3>
 
 <div class="container">
   <form class="transfer" [formGroup]="transferGroup" (ngSubmit)="onSubmit()">
@@ -8,7 +10,7 @@
     </label>
     <select id="from" formControlName="accountFrom">
       <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-        [selected]="i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}}
+        [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}}
         {{account.balanceInHundredScale / 100}} {{account.currency}}
       </option>
     </select>
@@ -16,13 +18,7 @@
     <label for="to">
       To account:
     </label>
-    <select id="to" formControlName="accountTo">
-      <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-        [selected]="i == 0 ? true : null">
-        {{account.name}} #{{account.accountBusinessId}}
-        {{account.balanceInHundredScale / 100}} {{account.currency}}
-      </option>
-    </select>
+    <input id="to" type="text" formControlName="accountTo">
 
     <label for="amount">
       Amount: [EUR]

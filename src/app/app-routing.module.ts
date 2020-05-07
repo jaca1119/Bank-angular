@@ -8,34 +8,46 @@ import { AuthGuard } from './auth/auth.guard';
 import { TransferComponent } from './transfer/transfer.component';
 import { environment } from "../environments/environment";
 import { InternalComponent } from './internal/internal.component';
-import { ForeignDomesticComponent } from './foreign-domestic/foreign-domestic.component';
+import { DomesticComponent } from "./domestic/domestic.component";
 
 let authPath;
+let enableTracing;
 
 if (environment.production) {
-  authPath = { 
+  authPath = {
     path: 'auth',
     component: HomeComponent,
     canActivate: [AuthGuard],
-    
+
     children: [
-    { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent, children: [
-      { path: 'internal', component: InternalComponent },
-      { path: 'fordom', component: ForeignDomesticComponent }
-    ] }
-  ]};
+      { path: 'account/:accountId', component: AccountDetailsComponent },
+      {
+        path: 'transfer', component: TransferComponent, children: [
+          { path: 'internal', component: InternalComponent },
+          { path: 'domestic', component: DomesticComponent }
+        ]
+      }
+    ]
+  };
+
+  enableTracing = { enableTracing: false };
+
 } else {
-  authPath = { 
+  authPath = {
     path: 'auth',
     component: HomeComponent,
     children: [
-    { path: 'account/:accountId', component: AccountDetailsComponent },
-    { path: 'transfer', component: TransferComponent, children: [
-      { path: 'internal', component: InternalComponent },
-      { path: 'fordom', component: ForeignDomesticComponent }
-    ]}
-  ]};
+      { path: 'account/:accountId', component: AccountDetailsComponent },
+      {
+        path: 'transfer', component: TransferComponent, children: [
+          { path: 'internal', component: InternalComponent },
+          { path: 'domestic', component: DomesticComponent }
+        ]
+      }
+    ]
+  };
+
+  enableTracing = { enableTracing: true };
 }
 
 const routes: Routes = [
@@ -48,7 +60,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { enableTracing: true }
+    enableTracing
   )],
   exports: [RouterModule]
 })
