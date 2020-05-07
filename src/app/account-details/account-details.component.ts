@@ -19,7 +19,7 @@ export class AccountDetailsComponent implements OnInit {
 
       this.userDetailsService.userData$.subscribe(userData => {
         this.account = userData.accounts.find(account => {
-          account.id == accountId;
+          return account.id == accountId;
         });
       });
 
