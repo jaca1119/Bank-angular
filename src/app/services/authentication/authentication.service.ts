@@ -54,4 +54,8 @@ export class AuthenticationService {
     return sessionStorage.getItem('isLoggedIn') === 'true';
   }
 
+  logout() {
+    sessionStorage.setItem('isLoggedIn', 'false');
+  }
+
 }
