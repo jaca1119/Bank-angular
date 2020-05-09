@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   userData: UserData;
   isDataLoaded = false;
+  shouldShowCreateAccount = true;
 
   constructor(
     private userDetailsService: UserDetailsService,
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userDetailsService.getUserData();
     this.userDetailsService.userData$.subscribe(userData => this.userData = userData);
+
+    this.shouldShowCreateAccount = this.isCreatingNewAccountPossible();
   }
 
   openPanel() {
@@ -28,6 +31,11 @@ export class HomeComponent implements OnInit {
 
   closePanel() {
     document.getElementById("sideNav").classList.remove("open");
+  }
+
+  isCreatingNewAccountPossible(): boolean {
+
+    return this.userData.accounts.length < 3;
   }
 
   logout() {
