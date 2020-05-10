@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit {
 
   isCreatingNewAccountPossible(): boolean {
 
-    return this.userData.accounts.length < 3;
+    //TODO: FIX asynchrous call
+    // return this.userData.accounts.length < 3;
+    return true;
   }
 
   logout() {
