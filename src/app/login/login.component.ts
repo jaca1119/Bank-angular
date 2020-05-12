@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +45,17 @@ export class LoginComponent implements OnInit {
 
   refreshToken() {
     this.authService.refreshToken();
+  }
+
+  @HostListener('window:message', ['$event'])
+  getDataFromPostMessage(event: MessageEvent) {
+
+    if (!environment.PAYMENT_URLS.includes(event.origin)) {
+      return;
+    }
+
+    //todo this.paymentService.setData(event.data);
+    console.warn(event.data);
   }
 
 }
