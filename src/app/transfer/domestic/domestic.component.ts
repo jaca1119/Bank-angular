@@ -24,8 +24,8 @@ export class DomesticComponent implements OnInit {
     this.transferGroup = formBuilder.group({
       accountFrom: [''],
       accountTo: [{ value: '', disabled: false }],
-      message: [''],
-      amount: [0, Validators.min(1)]
+      amount: [0, Validators.min(1)],
+      message: ['']
     });
   }
 
@@ -35,7 +35,7 @@ export class DomesticComponent implements OnInit {
     });
 
     if (this.paymentService.paymentData) {
-      this.transferGroup.controls['accountTo'].disable();
+      this.setFormValues(this.paymentService.paymentData);
     }
   }
 
@@ -65,6 +65,20 @@ export class DomesticComponent implements OnInit {
       zone: Intl.DateTimeFormat().resolvedOptions().timeZone
     };
     return transferDTO
+  }
+
+  setFormValues(paymentData) {
+    let accountTo = this.transferGroup.controls['accountTo'];
+    accountTo.disable();
+    accountTo.setValue('Pizzeria bank id');
+
+    let amount = this.transferGroup.controls['amount'];
+    amount.disable();
+    amount.setValue(paymentData.amount);
+
+    let message = this.transferGroup.controls['message'];
+    message.disable();
+    message.setValue(paymentData.message);
   }
 
 }

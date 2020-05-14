@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   @HostListener('window:message', ['$event'])
-  onPostMessage(event) {
+  onPostMessage(event: MessageEvent) {
 
     if (!environment.PAYMENT_URLS.includes(event.origin)) {
       return;
