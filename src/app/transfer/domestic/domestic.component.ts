@@ -40,8 +40,6 @@ export class DomesticComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.warn(this.transferGroup.getRawValue());
-    // console.warn(this.transferGroup);
     if (this.transferGroup.valid) {
       let transferDTO = this.createTransferDTO(this.transferGroup.getRawValue());
 
@@ -55,9 +53,7 @@ export class DomesticComponent implements OnInit {
           this.userDetailsService.getUserData();
 
           if (this.paymentService.paymentData) {
-            // console.warn(window.parent.origin);
-
-            window.parent.postMessage("Payment succes", environment.PAYMENT_URLS[0]);
+            window.parent.postMessage("Payment succes", this.paymentService.paymentData.parentURL);
           }
         }
       });
