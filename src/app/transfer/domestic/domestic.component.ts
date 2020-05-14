@@ -3,6 +3,7 @@ import { UserDetailsService, Account } from '../../services/user-details/user-de
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PaymentService } from 'src/app/services/payment/payment.service';
 
 @Component({
   selector: 'app-domestic',
@@ -12,16 +13,18 @@ import { environment } from 'src/environments/environment';
 export class DomesticComponent implements OnInit {
   transferGroup: FormGroup;
   accounts: Account[];
+  isPayment: boolean = true;
 
   constructor(
     private userDetailsService: UserDetailsService,
     private formBuilder: FormBuilder,
+    private paymentService: PaymentService,
     private http: HttpClient,
   ) {
     this.transferGroup = formBuilder.group({
-      accountFrom: '',
-      accountTo: '',
-      message: '',
+      accountFrom: [''],
+      accountTo: [{ value: '', disabled: false }],
+      message: [''],
       amount: [0, Validators.min(1)]
     });
   }
@@ -30,6 +33,10 @@ export class DomesticComponent implements OnInit {
     this.userDetailsService.userData$.subscribe(userData => {
       this.accounts = userData.accounts
     });
+
+    if (this.paymentService.paymentData) {
+      this.transferGroup.controls['accountTo'].disable();
+    }
   }
 
   onSubmit() {
