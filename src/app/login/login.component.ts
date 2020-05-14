@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
 
     this.isPayment = true;
     this.paymentService.setData(event.data);
-
   }
 
 }

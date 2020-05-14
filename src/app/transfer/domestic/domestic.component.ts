@@ -53,7 +53,7 @@ export class DomesticComponent implements OnInit {
           this.userDetailsService.getUserData();
 
           if (this.paymentService.paymentData) {
-            window.parent.postMessage("Payment succes", this.paymentService.paymentData.parentURL);
+            window.parent.postMessage("success", this.paymentService.paymentData.parentURL);
           }
         }
       });
