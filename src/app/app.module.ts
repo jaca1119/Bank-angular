@@ -10,9 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { RegisterComponent } from './register/register.component';
 import { TransferComponent } from './transfer/transfer.component';
-import { InternalComponent } from './internal/internal.component';
-import { DomesticComponent } from './domestic/domestic.component';
+import { InternalComponent } from './transfer/internal/internal.component';
+import { DomesticComponent } from './transfer/domestic/domestic.component';
 import { TransferDetailsComponent } from './account-details/transfer-details/transfer-details.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
    declarations: [
@@ -24,7 +25,8 @@ import { TransferDetailsComponent } from './account-details/transfer-details/tra
       TransferComponent,
       InternalComponent,
       DomesticComponent,
-      TransferDetailsComponent
+      TransferDetailsComponent,
+      CreateAccountComponent
    ],
    imports: [
       BrowserModule,

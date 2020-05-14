@@ -16,6 +16,9 @@
           (click)="closePanel()">{{account.name}}
           #{{i + 1}}</a>
       </div>
+
+      <a *ngIf="shouldShowCreateAccount" [routerLink]="['create']">Create account</a>
+
       <p>
         Operations:
       </p>

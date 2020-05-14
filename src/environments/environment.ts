@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  API_KEY: 'http://localhost:8080'
+  API_KEY: 'http://localhost:8080',
+  PAYMENT_URLS: [
+    'http://localhost:3000'
+  ]
 };
 
 /*
