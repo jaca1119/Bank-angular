@@ -22,10 +22,10 @@ export class DomesticComponent implements OnInit {
     private http: HttpClient,
   ) {
     this.transferGroup = formBuilder.group({
-      accountFrom: [''],
-      accountTo: [{ value: '', disabled: false }],
-      amount: [0, Validators.min(1)],
-      message: ['']
+      accountFrom: ['', Validators.required],
+      accountTo: [{ value: '', disabled: false }, Validators.required],
+      amount: [0, Validators.min(1), Validators.required],
+      message: ['', [Validators.required, Validators.maxLength(60)]]
     });
   }
 
@@ -40,18 +40,28 @@ export class DomesticComponent implements OnInit {
   }
 
   onSubmit() {
-    let transferDTO = this.createTransferDTO(this.transferGroup.value);
+    // console.warn(this.transferGroup.getRawValue());
+    // console.warn(this.transferGroup);
+    if (this.transferGroup.valid) {
+      let transferDTO = this.createTransferDTO(this.transferGroup.getRawValue());
 
-    this.http.post(environment.API_KEY + "/transfer", transferDTO, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      withCredentials: true,
-      observe: 'response',
-      responseType: 'text'
-    }).subscribe(response => {
-      if (response.ok) {
-        this.userDetailsService.getUserData();
-      }
-    });
+      this.http.post(environment.API_KEY + "/transfer", transferDTO, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true,
+        observe: 'response',
+        responseType: 'text'
+      }).subscribe(response => {
+        if (response.ok) {
+          this.userDetailsService.getUserData();
+
+          if (this.paymentService.paymentData) {
+            // console.warn(window.parent.origin);
+
+            window.parent.postMessage("Payment succes", environment.PAYMENT_URLS[0]);
+          }
+        }
+      });
+    }
   }
 
   createTransferDTO(formValue) {
@@ -70,7 +80,7 @@ export class DomesticComponent implements OnInit {
   setFormValues(paymentData) {
     let accountTo = this.transferGroup.controls['accountTo'];
     accountTo.disable();
-    accountTo.setValue('Pizzeria bank id');
+    accountTo.setValue('321t');
 
     let amount = this.transferGroup.controls['amount'];
     amount.disable();
