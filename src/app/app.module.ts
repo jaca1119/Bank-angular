@@ -14,6 +14,8 @@ import { InternalComponent } from './transfer/internal/internal.component';
 import { DomesticComponent } from './transfer/domestic/domestic.component';
 import { TransferDetailsComponent } from './account-details/transfer-details/transfer-details.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { TokenTimerComponent } from './token-timer/token-timer.component';
+import { InfoMessageComponent } from './info-message/info-message.component';
 
 @NgModule({
    declarations: [
@@ -26,7 +28,9 @@ import { CreateAccountComponent } from './create-account/create-account.componen
       InternalComponent,
       DomesticComponent,
       TransferDetailsComponent,
-      CreateAccountComponent
+      CreateAccountComponent,
+      TokenTimerComponent,
+      InfoMessageComponent
    ],
    imports: [
       BrowserModule,

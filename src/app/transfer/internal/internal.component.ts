@@ -3,6 +3,8 @@ import { UserDetailsService, Account } from 'src/app/services/user-details/user-
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-internal',
@@ -16,6 +18,7 @@ export class InternalComponent implements OnInit {
   constructor(
     private userDetailsService: UserDetailsService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private http: HttpClient,
   ) {
     this.transferGroup = formBuilder.group({
@@ -41,11 +44,26 @@ export class InternalComponent implements OnInit {
         withCredentials: true,
         observe: 'response',
         responseType: 'text'
-      }).subscribe(response => {
-        if (response.ok) {
-          this.userDetailsService.getUserData();
-        }
-      });
+      })
+        .subscribe(response => {
+          if (response.ok) {
+            this.userDetailsService.getUserData();
+          }
+        },
+          err => {
+            this.router.navigateByUrl("auth/info", {
+              state: {
+                isSuccessful: false,
+              }
+            });
+          },
+          () => {
+            this.router.navigateByUrl("auth/info", {
+              state: {
+                isSuccessful: true,
+              }
+            });
+          });
     }
   }
 

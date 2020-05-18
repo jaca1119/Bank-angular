@@ -1,26 +1,43 @@
-<p>Registration</p>
-<div class="registration">
-  <div *ngIf="isRegistrationSucceed">
-    Congratulations! Your account is registered but it requires email verification
+<div class="sidenav">
+  <div class="logo">
+    <img src="assets/bank-logo.png" alt="bank-logo">
   </div>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
-    <label for="username">Username:</label> <br>
-    <input id="username" type="text" formControlName="username" required>
-    <br>
-
-    <label for="email">E-mail:</label> <br>
-    <input id="email" type="email" formControlName="email" required>
-    <br>
-
-    <label for="password">Password:</label><br>
-    <input id="password" type="password" formControlName="password" required>
-    <br>
-
-    <button type="submit" [disabled]="!registrationForm.valid">Register</button>
-  </form>
-
-  <div>
-    <button (click)="navigateToLogin()">Go to login</button>
-  </div>
+  <nav></nav>
 </div>
+
+<div class="container">
+  <img class="logo-small" src="assets/bank-logo.png" alt="bank-logo">
+</div>
+<main>
+  <div class="registration">
+    <div *ngIf="isRegistrationSucceed">
+      Congratulations! Your account is registered but it requires email verification
+    </div>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <label for="username">Username:</label> <br>
+      <input id="username" type="text" formControlName="username" required>
+      <br>
+
+      <label for="email">E-mail:</label> <br>
+      <input id="email" type="email" formControlName="email" required>
+      <br>
+
+      <label for="password">Password:</label><br>
+      <input id="password" type="password" formControlName="password" required>
+      <br>
+
+      <button class="button" type="submit" [disabled]="!registrationForm.valid">Register</button>
+    </form>
+
+    <div>
+      <button class="button" (click)="navigateToLogin()">Go to login</button>
+    </div>
+  </div>
+
+  <footer>
+    Online banking system
+    © 2020
+  </footer>
+</main>

@@ -1,6 +1,86 @@
 .registration {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.sidenav nav {
+  height: 100%;
+  background-color: #111;
+  color: white;
+  overflow-x: hidden;
+}
+
+main {
+  margin-left: 200px;
+  margin-top: 100px;
+  border: 1px solid red;
+  width: 50%;
+}
+
+.logo {
+  height: 100px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.container {
+  display: none;
+  border: 1px solid black;
+}
+
+.button {
+  font-weight: bold;
+  background-color: rgb(33, 34, 34);
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  text-decoration: none;
+  color: khaki;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+footer {
+  background-color: rgb(33, 34, 34);
+  color: khaki;
+  height: 10vh;
+}
+
+@media (max-width: 600px) {
+  main {
+    margin: unset;
+    border: 1px solid red;
+    width: unset;
+  }
+
+  .sidenav {
+    display: none;
+  }
+
+  .container {
+    display: block;
+    height: 100px;
+  }
 }
