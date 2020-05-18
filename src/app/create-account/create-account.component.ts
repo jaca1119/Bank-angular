@@ -31,8 +31,21 @@ export class CreateAccountComponent implements OnInit {
       this.userService.createAccount(this.createAccountGroup.getRawValue())
         .subscribe(response => {
           this.userService.getUserData();
-          this.router.navigateByUrl('/auth');
-        });
+        },
+          err => {
+            this.router.navigateByUrl("auth/info", {
+              state: {
+                isSuccessful: false,
+              }
+            });
+          },
+          () => {
+            this.router.navigateByUrl("auth/info", {
+              state: {
+                isSuccessful: true,
+              }
+            });
+          });
     }
   }
 }

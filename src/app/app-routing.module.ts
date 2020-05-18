@@ -10,6 +10,7 @@ import { environment } from "../environments/environment";
 import { InternalComponent } from './transfer/internal/internal.component';
 import { DomesticComponent } from "./transfer/domestic/domestic.component";
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { InfoMessageComponent } from './info-message/info-message.component';
 
 let authPath;
 let enableTracing;
@@ -28,7 +29,8 @@ if (environment.production) {
           { path: 'domestic', component: DomesticComponent }
         ]
       },
-      { path: 'create', component: CreateAccountComponent }
+      { path: 'create', component: CreateAccountComponent },
+      { path: 'info', component: InfoMessageComponent }
     ]
   };
 
@@ -46,7 +48,8 @@ if (environment.production) {
           { path: 'domestic', component: DomesticComponent }
         ]
       },
-      { path: 'create', component: CreateAccountComponent }
+      { path: 'create', component: CreateAccountComponent },
+      { path: 'info', component: InfoMessageComponent }
     ]
   };
 

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaymentService } from 'src/app/services/payment/payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-domestic',
@@ -18,6 +19,7 @@ export class DomesticComponent implements OnInit {
   constructor(
     private userDetailsService: UserDetailsService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private paymentService: PaymentService,
     private http: HttpClient,
   ) {
@@ -56,7 +58,21 @@ export class DomesticComponent implements OnInit {
             window.parent.postMessage("success", this.paymentService.paymentData.parentURL);
           }
         }
-      });
+      },
+        err => {
+          this.router.navigateByUrl("auth/info", {
+            state: {
+              isSuccessful: false,
+            }
+          });
+        },
+        () => {
+          this.router.navigateByUrl("auth/info", {
+            state: {
+              isSuccessful: true,
+            }
+          });
+        });
     }
   }
 
