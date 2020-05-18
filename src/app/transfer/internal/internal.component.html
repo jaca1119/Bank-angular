@@ -8,7 +8,7 @@
     </label>
     <select id="from" formControlName="accountFrom">
       <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
-        [selected]="i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}}
+        [selected]="i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}} |
         {{account.balanceInHundredScale / 100}} {{account.currency}}
       </option>
     </select>
@@ -19,7 +19,7 @@
     <select id="to" formControlName="accountTo">
       <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
         [selected]="i == 0 ? true : null">
-        {{account.name}} #{{account.accountBusinessId}}
+        {{account.name}} #{{account.accountBusinessId}} |
         {{account.balanceInHundredScale / 100}} {{account.currency}}
       </option>
     </select>
