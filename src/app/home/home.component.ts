@@ -20,7 +20,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailsService.getUserData();
-    this.userDetailsService.userData$.subscribe(userData => this.userData = userData);
+    this.userDetailsService.userData$.subscribe(userData => {
+      this.userData = userData;
+      this.shouldShowCreateAccount = this.isCreatingNewAccountPossible();
+    });
 
     this.shouldShowCreateAccount = this.isCreatingNewAccountPossible();
     this.authService.refreshToken();
