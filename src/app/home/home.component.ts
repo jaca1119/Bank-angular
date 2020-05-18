@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     this.userDetailsService.userData$.subscribe(userData => this.userData = userData);
 
     this.shouldShowCreateAccount = this.isCreatingNewAccountPossible();
+    this.authService.refreshToken();
   }
 
   openPanel() {
