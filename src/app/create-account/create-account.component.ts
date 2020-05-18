@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDetailsService } from '../services/user-details/user-details.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -14,6 +15,7 @@ export class CreateAccountComponent implements OnInit {
   constructor(
     private userService: UserDetailsService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.createAccountGroup = this.formBuilder.group({
       accountName: ['', [Validators.minLength(3), Validators.maxLength(60), Validators.required]],
@@ -25,12 +27,11 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.createAccountGroup.value);
-    console.warn(this.createAccountGroup.valid);
     if (this.createAccountGroup.valid) {
-      this.userService.createAccount(this.createAccountGroup.value)
+      this.userService.createAccount(this.createAccountGroup.getRawValue())
         .subscribe(response => {
-          console.warn(response);
+          this.userService.getUserData();
+          this.router.navigateByUrl('/auth');
         });
     }
   }
