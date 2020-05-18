@@ -76,7 +76,7 @@ export class DomesticComponent implements OnInit {
   setFormValues(paymentData) {
     let accountTo = this.transferGroup.controls['accountTo'];
     accountTo.disable();
-    accountTo.setValue('321t');
+    accountTo.setValue(environment.PIZZERIA_ID);
 
     let amount = this.transferGroup.controls['amount'];
     amount.disable();
