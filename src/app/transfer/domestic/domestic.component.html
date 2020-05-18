@@ -11,7 +11,7 @@
     <select id="from" formControlName="accountFrom">
       <option *ngFor="let account of accounts; index as i" [value]="account.accountBusinessId"
         [selected]="accounts.length != 1 && i == 0 ? true : null">{{account.name}} #{{account.accountBusinessId}}
-        {{account.balanceInHundredScale / 100}} {{account.currency}}
+        {{account.balanceInHundredScale / 100}} | {{account.currency}}
       </option>
     </select>
 

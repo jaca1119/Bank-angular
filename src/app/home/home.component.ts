@@ -34,10 +34,10 @@ export class HomeComponent implements OnInit {
   }
 
   isCreatingNewAccountPossible(): boolean {
+    if (this.userData)
+      return this.userData.accounts.length < 3;
 
-    //TODO: FIX asynchrous call
-    // return this.userData.accounts.length < 3;
-    return true;
+    return false;
   }
 
   logout() {

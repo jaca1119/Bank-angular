@@ -30,7 +30,6 @@ export class UserDetailsService {
   };
 
   private userDataSubject = new ReplaySubject<UserData>(1);
-
   userData$: Observable<UserData> = this.userDataSubject.asObservable();
 
 
