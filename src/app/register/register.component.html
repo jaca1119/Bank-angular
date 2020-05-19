@@ -14,6 +14,9 @@
     <div *ngIf="isRegistrationSucceed">
       Congratulations! Your account is registered but it requires email verification
     </div>
+    <div>
+      (E-mail is not stored in any db but for your convenience use temporary email account.)
+    </div>
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
       <label for="username">Username:</label> <br>
