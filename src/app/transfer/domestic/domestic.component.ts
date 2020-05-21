@@ -26,7 +26,7 @@ export class DomesticComponent implements OnInit {
     this.transferGroup = formBuilder.group({
       accountFrom: ['', Validators.required],
       accountTo: [{ value: '', disabled: false }, Validators.required],
-      amount: [0, Validators.min(1), Validators.required],
+      amount: [0, [Validators.min(1), Validators.required]],
       message: ['', [Validators.required, Validators.maxLength(60)]]
     });
   }

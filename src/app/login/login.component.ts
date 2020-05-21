@@ -11,10 +11,11 @@ import { PaymentService } from '../services/payment/payment.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginValue: string = '';
   isLoginFailed: boolean = false;
   loginForm: FormGroup;
   isPayment: boolean = false;
+  timeout;
+  isWaitingForServer: boolean = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -32,6 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.timeout = setTimeout(() => {
+      this.isWaitingForServer = true;
+    }, 1000);
+
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe(() => {
         this.isLoginFailed = !this.authService.isLoggedIn();
@@ -40,6 +45,10 @@ export class LoginComponent implements OnInit {
           this.navigate();
         }
       });
+  }
+
+  onDestroy() {
+    clearTimeout(this.timeout);
   }
 
   navigate() {

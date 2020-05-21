@@ -12,6 +12,9 @@
 
 <main>
   <div class="login">
+    <div *ngIf="isWaitingForServer">
+      Waiting for Heroku server startup (it may take a while)
+    </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <label for="login">Login:</label> <br>
