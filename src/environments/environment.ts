@@ -7,7 +7,8 @@ export const environment = {
   API_KEY: 'http://localhost:8080',
   PIZZERIA_ID: '99 3333 7777 0000 0000 0001 1111',
   PAYMENT_URLS: [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://localhost:4201'
   ]
 };
 
